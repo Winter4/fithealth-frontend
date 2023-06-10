@@ -1,0 +1,27 @@
+@import "@/assets/scss/varibles.scss";
+
+.progress {
+  background: $darkWhite;
+  margin: 20px;
+  border-radius: 8px;
+  color: #FFF;
+  font-weight: 550;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: wrap;
+  @media (min-width: 767px) {
+    width: 80%;
+    margin: 0 auto;
+  }
+  &-bar {
+    background-color: #8FCF38 !important;
+    max-width: 100%;
+    min-width: 20%;
+    text-align: center;
+    padding: 3px;
+
+    background-size: 1rem 1rem;
+    border-radius: 8px;
+  }
+}

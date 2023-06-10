@@ -1,0 +1,15 @@
+@import "@/assets/scss/styles.scss";
+
+.td:not(:last-child) {
+  border-right: 1px solid $lineGrey;
+  line-height: 17.07px;
+  padding: 0 3px;
+}
+
+.button {
+  background: none;
+  cursor: pointer;
+  padding: 0 5px;
+  border: 0;
+  outline: 0;
+}

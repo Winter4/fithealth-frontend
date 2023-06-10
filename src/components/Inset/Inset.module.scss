@@ -1,0 +1,18 @@
+@import "@/assets/scss/varibles.scss";
+
+.inset {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  &__content {
+    background: $ligthwhite;
+    padding: 15px;
+    min-height: 100vh;
+    height: auto;
+    border-top: 1px solid $border;
+  }
+
+  @media (min-width: 767px) and (max-width: 1500px) {
+    margin-left: 50px;
+  }
+}

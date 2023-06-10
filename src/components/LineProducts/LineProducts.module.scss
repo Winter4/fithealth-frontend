@@ -1,0 +1,43 @@
+.lineProducts {
+  position: relative;
+  width: 513px;
+  height: 447px;
+  &__line {
+    max-width: 513px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__products {
+    max-width: 378px;
+    width: 100%;
+    padding: 33.5px 42px 58.5px 84px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__greyLine {
+    height: 135%;
+    position: absolute;
+    top: 100%;
+    left: 99%;
+    transform: translate(-100%, -99%);
+  }
+}
+
+@media (max-width: 767px) {
+  .lineProducts {
+    display: none;
+  }
+}
+
+@media (min-width: 1500px) {
+  .lineProducts {
+    display: none;
+  }
+}

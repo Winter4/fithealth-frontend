@@ -1,0 +1,23 @@
+@import "@/assets/scss/styles.scss";
+
+.cards {
+  margin: 0 auto;
+  margin-top: 35px;
+  max-width: 357px;
+  width: 100%;
+}
+
+.button {
+  background: $orange;
+  color: $ligthwhite;
+  cursor: pointer;
+  padding: 14px 0 13px 0;
+  box-shadow: 0px 4px 16px #da7b7b;
+  border-radius: 100px;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-weight: 700;
+  line-height: 19.5px;
+  text-align: center;
+}
