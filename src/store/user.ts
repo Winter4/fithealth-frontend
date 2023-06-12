@@ -24,9 +24,7 @@ export const FetchUserData = createAsyncThunk(
       // );
       // const data = response.json();
       // return data;
-      return fetch(`${import.meta.env.VITE_APP_API_URL}/report/${id}`, {
-        // credentials: "include",
-      })
+      return fetch(`${import.meta.env.VITE_APP_API_URL}/report/${id}`)
         .then((res) => res.json())
         .then((data) => {
           return data;
