@@ -12,7 +12,7 @@ export const FetchCaloriesData = createAsyncThunk(
     // это не тести , тести через браузер я это пока делаю без 1 cookies
     try {
       return fetch(`${import.meta.env.VITE_APP_API_URL}/meal/calories/`, {
-        // credentials: "include",
+        credentials: "include",
       })
         .then((res) => res.json())
         .then((data) => {
