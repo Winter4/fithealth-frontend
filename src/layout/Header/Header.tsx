@@ -2,8 +2,14 @@ import { images } from "@/assets/images";
 import styles from "./Header.module.scss";
 import { Calories } from "@/context/calories";
 import { useContext } from "react";
+import { useAppSelector } from "@/hooks/useRedux";
 
+/* TODO: Пользователь: ID 1.
+ При загрузке страницы: GET /report/:uuid. Ответ - ID юзера, кол-во калорий на день. 
+ В этот момент можно кинуть uuid в куки, чтоб не вставлять его каждый раз в куери или куда-то там
+ */
 export const Header = () => {
+  const user = useAppSelector((state) => state.user.user.userId);
   const { max, value } = useContext(Calories);
   return (
     <header className={styles.header}>
@@ -26,7 +32,7 @@ export const Header = () => {
             <img className={styles.user__img} src={images.user} alt="User" />
           </div>
           <div className={styles.user__info}>
-            <h1 className={styles.user__h1 + " big"}>Привет, Антон!</h1>
+            <h1 className={styles.user__h1 + " big"}>Пользователь: {user}</h1>
             <p className={styles.user__p + " medium"}>
               калорий за сегодня:{" "}
               <span

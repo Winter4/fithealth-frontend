@@ -1,13 +1,13 @@
 import { IProduct } from "@/types";
 import styles from "./CardItem.module.scss";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Select } from "../Select/Select";
 import { Form } from "../Form/Form";
 import { Table } from "../Table/Table";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { addProduct, removeProduct } from "@/store/calories";
+import { addProduct, changeColories, removeProduct } from "@/store/calories";
 import { v4 as uuid } from "uuid";
 import clsx from "clsx";
+import { Input } from "../Input/Input";
 
 interface IProps {
   card: IProduct;
@@ -15,7 +15,7 @@ interface IProps {
 
 export const CardItem = ({ card }: IProps) => {
   const data = useAppSelector((state) =>
-    state.calories.find((e) => e.id == card.id)
+    state.calories.products.find((e) => e.id == card.id)
   );
   const dispath = useAppDispatch();
 
@@ -35,24 +35,39 @@ export const CardItem = ({ card }: IProps) => {
     if (name === "") return;
 
     dispath(addProduct({ cardId: card.id, id: uuid(), name, weight: +weight }));
+
+    setWeight("");
+  };
+
+  const handleChangeColories = (id: string) => {
+    console.log(id);
+    const newColories = prompt(
+      "Измените калории",
+      String(data?.products.find((product) => product.id === id)?.weight)
+    )!;
+
+    dispath(changeColories({ cardId: card.id, id, newColories }));
   };
 
   const deleteProduct = (id: string) => {
-    dispath(removeProduct({ cardId: card.id, id: id }));
+    dispath(removeProduct({ cardId: card.id, id }));
   };
 
   return (
     <li className={styles.cardItem}>
-      <h2 className={clsx(styles.cardItem__h1, "big")}>
-        {card.name}{" "}
-      </h2>
-      <Select
-        id={data!.id}
+      <h2 className={clsx(styles.cardItem__h1, "big")}>{card.name} </h2>
+      <Input
         allowedProducts={data!.allowedProducts}
         onChange={handleChangeSelectItem}
       />
       <Form text={weight} handleSubmit={onSubmit} handleChange={handleChange} />
-      <Table deleteProduct={deleteProduct} card={data!} />
+      {data!.products!.length > 0 && (
+        <Table
+          changeColories={handleChangeColories}
+          deleteProduct={deleteProduct}
+          card={data!}
+        />
+      )}
     </li>
   );
 };

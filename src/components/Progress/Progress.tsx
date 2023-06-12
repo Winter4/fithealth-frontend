@@ -16,7 +16,7 @@ export const Progress = ({ max, value }: IProps) => {
         className={styles["progress-bar"]}
         style={{
           width: `${(value / max) * 100}%`,
-          backgroundColor: value > max ? "#DA7B7B" : "#00e234",
+          backgroundColor: value > max ? "#DA7B7B" : "#8fcf38",
         }}
       >{`${value} ккал / ${max} ккал`}</div>
     </div>

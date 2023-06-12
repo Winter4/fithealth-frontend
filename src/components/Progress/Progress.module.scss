@@ -2,9 +2,9 @@
 
 .progress {
   background: $darkWhite;
-  margin: 20px;
+  margin: 20px auto;
   border-radius: 8px;
-  color: #FFF;
+  color: #fff;
   font-weight: 550;
   display: block;
   width: 100%;
@@ -15,7 +15,7 @@
     margin: 0 auto;
   }
   &-bar {
-    background-color: #8FCF38 !important;
+    background-color: #8fcf38;
     max-width: 100%;
     min-width: 20%;
     text-align: center;

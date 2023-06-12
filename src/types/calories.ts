@@ -7,8 +7,6 @@ export interface IProductItem {
 export interface IProduct {
   id: string;
   name: string;
-  ateColories: number;
-  calories: number;
   products: IProductItem[];
   allowedProducts: string[];
 }

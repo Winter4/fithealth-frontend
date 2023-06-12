@@ -5,30 +5,33 @@ import { AteProduct } from "../AteProduct/AteProduct";
 
 interface IProps {
   card: IProduct;
+  changeColories: (id: string) => void;
   deleteProduct: (id: string) => void;
 }
 
-export const Table = ({ card, deleteProduct }: IProps) => {
+export const Table = ({ card, changeColories, deleteProduct }: IProps) => {
   return (
     <>
-      {card.products.map((product) => (
-        <table key={product.id} className={styles.product}>
-          <thead>
-            <tr>
-              <th className={clsx(styles.th, "small")}>Продукт</th>
-              <th className={clsx(styles.th, "small")}>Съедено, г</th>
-              <th className={clsx(styles.th, "small")}>Калорий</th>
-            </tr>
-          </thead>
-          <tbody>
+      <table className={styles.product}>
+        <thead>
+          <tr>
+            <th className={clsx(styles.th, "small")}>Продукт</th>
+            <th className={clsx(styles.th, "small")}>Масса, г</th>
+            <th className={clsx(styles.th, "small")}>Калорий</th>
+          </tr>
+        </thead>
+        <tbody>
+          {card.products.map((product) => (
             <AteProduct
+              key={product.id}
+              changeColories={changeColories}
               deleteProduct={deleteProduct}
               card={card}
               product={product}
             />
-          </tbody>
-        </table>
-      ))}
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };

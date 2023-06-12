@@ -6,16 +6,27 @@ import { images } from "@/assets/images";
 interface IProps {
   card: IProduct;
   product: IProductItem;
+  changeColories: (id: string) => void;
   deleteProduct: (id: string) => void;
 }
 
-export const AteProduct = ({ card, product, deleteProduct }: IProps) => {
+export const AteProduct = ({
+  card,
+  product,
+  changeColories,
+  deleteProduct,
+}: IProps) => {
   return (
     <tr className={styles.product} key={product.id}>
       <td className={clsx(styles.td, "medium")}>{product.name}</td>
-      <td className={clsx(styles.td, "medium")}>{product.weight}</td>
+      <td
+        className={clsx(styles.td, "medium")}
+        onClick={() => changeColories(product.id)}
+      >
+        {product.weight}
+      </td>
       <td className={clsx(styles.td, "medium")}>
-        {card.calories - card.ateColories || 0}
+        {/* {card.calories - card.ateColories || 0} */}
       </td>
       <td className={clsx(styles.td, "medium")}>
         <button
