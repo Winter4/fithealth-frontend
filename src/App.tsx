@@ -40,16 +40,17 @@ function App() {
   ]);
 
   useEffect(() => {
-    const uuid = document.URL.split("/").pop()!;
-    dispath(FetchUserData(uuid))
-      .then(() => dispath(FetchCaloriesData()))
-      .then(() => dispath(FetchAllowedFoodData()))
-      .then(() => dispath(FetchFoodData(activeTab)));
+    const uuid = document.URL.split("/").pop();
+    if (uuid)
+      dispath(FetchUserData(uuid))
+        .then(() => dispath(FetchCaloriesData()))
+        .then(() => dispath(FetchAllowedFoodData()))
+        .then(() => dispath(FetchFoodData(activeTab)));
   }, [dispath]);
 
-  const max = user.user.calories;
+  const max = user.user.calories || 0;
 
-  const value = cards.ateCalories;
+  const value = cards.ateCalories || 0;
 
   const calories: { max: number; value: number } = { max, value };
 

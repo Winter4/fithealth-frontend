@@ -23,12 +23,14 @@ interface IProps {
 export const CardItem = ({ card }: IProps) => {
   const data = useAppSelector((state) =>
     state.calories.products.find((e) => e.id == card.id)
-  );
+  )!;
   const tab = useContext(Tab);
   const dispath = useAppDispatch();
 
   const [weight, setWeight] = useState<string>("");
-  const [name, setName] = useState<string>(data!.allowedProducts[0].name);
+  const [name, setName] = useState<string>(
+    data?.allowedProducts[0]?.name || ""
+  );
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setWeight(event.target.value);
@@ -72,18 +74,18 @@ export const CardItem = ({ card }: IProps) => {
 
   return (
     <li className={styles.cardItem}>
-      <h2 className={clsx(styles.cardItem__h1, "big")}>{card.name} </h2>
+      <h2 className={clsx(styles.cardItem__h1, "big")}>{data.name} </h2>
       <Input
-        id={data!.id}
-        allowedProducts={data!.allowedProducts}
+        id={data.id || uuid()}
+        allowedProducts={data.allowedProducts}
         onChange={handleChangeSelectItem}
       />
       <Form text={weight} handleSubmit={onSubmit} handleChange={handleChange} />
-      {data!.products!.length > 0 && (
+      {data.products.length > 0 && (
         <Table
           changeColories={handleChangeColories}
           deleteProduct={deleteProduct}
-          card={data!}
+          card={data}
         />
       )}
     </li>

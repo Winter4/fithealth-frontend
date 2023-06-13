@@ -16,7 +16,7 @@ export const Input = ({ id, allowedProducts, onChange }: IProps) => {
         className={styles.selectProduct}
         list={id}
         placeholder="Продукт"
-        defaultValue={allowedProducts[0].name}
+        defaultValue={allowedProducts[0]?.name || ""}
         onChange={(selected: ChangeEvent<HTMLInputElement>) =>
           onChange(selected.target.value)
         }

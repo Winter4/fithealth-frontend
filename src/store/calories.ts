@@ -134,6 +134,31 @@ export const FetchAddProduct = createAsyncThunk(
   }
 );
 
+// export const FetchСhangeColories = createAsyncThunk(
+//   "calories/FetchСhangeColories",
+//   async function (
+//     { id, weight }: { id: string; weight: number },
+//     { rejectWithValue }
+//   ) {
+//     try {
+//       return fetch(`${import.meta.env.VITE_APP_API_URL}/meal/${id}`, {
+//         method: "PATCH",
+//         headers: {
+//           "Content-type": "application/json",
+//         },
+//         body: JSON.stringify({ id, weight }),
+//         credentials: "include",
+//       })
+//         .then((res) => res.json())
+//         .then((data) => {
+//           return data;
+//         });
+//     } catch (error: any) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
 interface IState {
   ateCalories: number;
   status: "pending" | "fulfilled" | "rejected" | null;
@@ -296,6 +321,21 @@ export const Calories = createSlice({
       state.status = "rejected";
       state.error = action.error;
     });
+
+    // builder.addCase(FetchСhangeColories.pending, (state, action) => {
+    //   state.status = "pending";
+    //   state.error = null;
+    // });
+
+    // builder.addCase(FetchСhangeColories.fulfilled, (state, action) => {
+    //   state.status = "fulfilled";
+    //   state.error = null;
+    //   state.products[0].products[0].calories -= action.payload;
+    // });
+    // builder.addCase(FetchСhangeColories.rejected, (state, action) => {
+    //   state.status = "rejected";
+    //   state.error = action.error;
+    // });
   },
 });
 
