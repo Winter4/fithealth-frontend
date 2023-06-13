@@ -62,7 +62,6 @@ export const CardItem = ({ card }: IProps) => {
       "Измените калории",
       String(data?.products.find((product) => product.id === id)?.weight)
     )!;
-    console.log(card.id, id);
     dispath(FetchСhangeColories({ cardId: card.id, weight: +newColories, id }));
   };
 

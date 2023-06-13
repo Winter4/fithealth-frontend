@@ -110,7 +110,9 @@ export const FetchAddProduct = createAsyncThunk(
   ) {
     try {
       return fetch(
-        `${import.meta.env.VITE_APP_API_URL}/meal/healthy?tab=${tab}`,
+        `${import.meta.env.VITE_APP_API_URL}/meal/${
+          cardId ? "unhealthy" : "healthy"
+        }?tab=${tab}`,
         {
           method: "POST",
           headers: {
@@ -211,7 +213,7 @@ export const Calories = createSlice({
         weight: action.payload.weight,
         calories: action.payload.calories,
       });
-      // state[+action.payload.cardId].ateColories += action.payload.weight;
+      state.ateCalories += action.payload.calories;
     },
 
     changeColories(
@@ -279,8 +281,6 @@ export const Calories = createSlice({
       state.status = "rejected";
       state.error = action.error;
     });
-
-    //
 
     builder.addCase(FetchFoodData.pending, (state, action) => {
       state.status = "pending";
