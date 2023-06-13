@@ -9,9 +9,8 @@ interface IProps {
 export const CardList = ({ cards }: IProps) => {
   return (
     <ul className={styles.cards}>
-      {cards.map((card) => (
-        <CardItem key={card.id} card={card} />
-      ))}
+      {cards.length > 0 &&
+        cards.map((card) => <CardItem key={card.id} card={card} />)}
     </ul>
   );
 };

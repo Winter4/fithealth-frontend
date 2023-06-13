@@ -6,7 +6,12 @@ import { Inset, LineProducts, CardList } from "./components";
 import { useAppDispatch, useAppSelector } from "./hooks/useRedux";
 import { Calories } from "@/context/calories";
 import { FetchUserData } from "./store/user";
-import { FetchCaloriesData } from "./store/calories";
+import {
+  FetchCaloriesData,
+  FetchAllowedFoodData,
+  FetchFoodData,
+} from "./store/calories";
+import { Tab } from "./context/tab";
 
 function App() {
   const dispath = useAppDispatch();
@@ -16,19 +21,30 @@ function App() {
   const [activeTab, setActiveTab] = useState<number>(0);
   const [tabs] = useState<ITab[]>([
     {
+      id: "0",
       label: "Завтрак",
       content: <CardList cards={cards.products} />,
     },
-    { label: "Перекус 1", content: <CardList cards={cards.products} /> },
-    { label: "Обед", content: <CardList cards={cards.products} /> },
-    { label: "Перекус 2", content: <CardList cards={cards.products} /> },
-    { label: "Ужин", content: <CardList cards={cards.products} /> },
+    {
+      id: "1",
+      label: "Перекус 1",
+      content: <CardList cards={cards.products} />,
+    },
+    { id: "2", label: "Обед", content: <CardList cards={cards.products} /> },
+    {
+      id: "3",
+      label: "Перекус 2",
+      content: <CardList cards={cards.products} />,
+    },
+    { id: "4", label: "Ужин", content: <CardList cards={cards.products} /> },
   ]);
 
   useEffect(() => {
     const uuid = document.URL.split("/").pop()!;
-    dispath(FetchUserData(uuid));
-    dispath(FetchCaloriesData());
+    dispath(FetchUserData(uuid))
+      .then(() => dispath(FetchCaloriesData()))
+      .then(() => dispath(FetchAllowedFoodData()))
+      .then(() => dispath(FetchFoodData(activeTab)));
   }, [dispath]);
 
   const max = user.user.calories;
@@ -39,19 +55,26 @@ function App() {
 
   const switchTab = (index: number) => {
     setActiveTab(index);
+    dispath(FetchFoodData(index));
   };
 
   return (
-    <Calories.Provider value={calories}>
-      <Layout>
-        <main className="main">
-          <div className="main__container container">
-            <LineProducts />
-            <Inset tabs={tabs} switchTab={switchTab} activeIndex={activeTab} />
-          </div>
-        </main>
-      </Layout>
-    </Calories.Provider>
+    <Tab.Provider value={activeTab}>
+      <Calories.Provider value={calories}>
+        <Layout>
+          <main className="main">
+            <div className="main__container container">
+              <LineProducts />
+              <Inset
+                tabs={tabs}
+                switchTab={switchTab}
+                activeIndex={activeTab}
+              />
+            </div>
+          </main>
+        </Layout>
+      </Calories.Provider>
+    </Tab.Provider>
   );
 }
 

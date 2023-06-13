@@ -1,13 +1,20 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { IProduct } from "@/types";
 import styles from "./CardItem.module.scss";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { Form } from "../Form/Form";
 import { Table } from "../Table/Table";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { addProduct, changeColories, removeProduct } from "@/store/calories";
+import {
+  FetchAddProduct,
+  FetchRemoveProduct,
+  changeColories,
+  removeProduct,
+} from "@/store/calories";
 import { v4 as uuid } from "uuid";
 import clsx from "clsx";
 import { Input } from "../Input/Input";
+import { Tab } from "@/context/tab";
 
 interface IProps {
   card: IProduct;
@@ -17,10 +24,11 @@ export const CardItem = ({ card }: IProps) => {
   const data = useAppSelector((state) =>
     state.calories.products.find((e) => e.id == card.id)
   );
+  const tab = useContext(Tab);
   const dispath = useAppDispatch();
 
   const [weight, setWeight] = useState<string>("");
-  const [name, setName] = useState<string>(data!.allowedProducts[0]);
+  const [name, setName] = useState<string>(data!.allowedProducts[0].name);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setWeight(event.target.value);
@@ -33,8 +41,16 @@ export const CardItem = ({ card }: IProps) => {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (name === "") return;
-
-    dispath(addProduct({ cardId: card.id, id: uuid(), name, weight: +weight }));
+    dispath(
+      FetchAddProduct({
+        cardId: card.id,
+        id: uuid(),
+        name,
+        weight: +weight,
+        foodId: +data?.allowedProducts.find((e) => e.name === name)?.id!,
+        tab,
+      })
+    );
 
     setWeight("");
   };
@@ -50,6 +66,7 @@ export const CardItem = ({ card }: IProps) => {
   };
 
   const deleteProduct = (id: string) => {
+    dispath(FetchRemoveProduct(id));
     dispath(removeProduct({ cardId: card.id, id }));
   };
 
@@ -57,6 +74,7 @@ export const CardItem = ({ card }: IProps) => {
     <li className={styles.cardItem}>
       <h2 className={clsx(styles.cardItem__h1, "big")}>{card.name} </h2>
       <Input
+        id={data!.id}
         allowedProducts={data!.allowedProducts}
         onChange={handleChangeSelectItem}
       />

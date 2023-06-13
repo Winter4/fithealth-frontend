@@ -11,20 +11,9 @@ export const FetchUserData = createAsyncThunk(
   "user/FetchUserData",
   async function (id: string, { rejectWithValue }) {
     try {
-      // изначально я делал на axios , тут оно одинаково
-      // const response = await axios.get<IUser>(
-      //   `${import.meta.env.VITE_APP_API_URL}/report/${id}`,
-      //   { withCredentials: true }
-      // );
-      // document.cookie = `userId=${id};`;
-      // document.cookie = `report_id=${response.data.userId};`;
-      // return response.data;
-      // const response = await fetch(
-      //   `${import.meta.env.VITE_APP_API_URL}/report/${id}`
-      // );
-      // const data = response.json();
-      // return data;
-      return fetch(`${import.meta.env.VITE_APP_API_URL}/report/${id}`)
+      return fetch(`${import.meta.env.VITE_APP_API_URL}/report/${id}`, {
+        credentials: "include",
+      })
         .then((res) => res.json())
         .then((data) => {
           return data;

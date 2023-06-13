@@ -1,18 +1,19 @@
+import { IAllowedProduct } from "@/types";
 import styles from "./SelectItem.module.scss";
 
 interface IProps {
-  product: string;
+  product: IAllowedProduct;
 }
 
 export const SelectItem = ({ product }: IProps) => {
   return (
     <option
-      key={product}
+      key={product.id}
       className={styles.selectProduct__product}
-      id={product}
-      value={product}
+      data-id={String(product.id)}
+      value={product.name}
     >
-      {product}
+      {product.name}
     </option>
   );
 };

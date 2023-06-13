@@ -25,9 +25,7 @@ export const AteProduct = ({
       >
         {product.weight}
       </td>
-      <td className={clsx(styles.td, "medium")}>
-        {/* {card.calories - card.ateColories || 0} */}
-      </td>
+      <td className={clsx(styles.td, "medium")}>{product.calories}</td>
       <td className={clsx(styles.td, "medium")}>
         <button
           className={styles.button}
