@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
   FetchAddProduct,
   FetchRemoveProduct,
+  FetchСhangeColories,
   changeColories,
   removeProduct,
 } from "@/store/calories";
@@ -46,7 +47,6 @@ export const CardItem = ({ card }: IProps) => {
     dispath(
       FetchAddProduct({
         cardId: card.id,
-        id: uuid(),
         name,
         weight: +weight,
         foodId: +data?.allowedProducts.find((e) => e.name === name)?.id!,
@@ -58,18 +58,17 @@ export const CardItem = ({ card }: IProps) => {
   };
 
   const handleChangeColories = (id: string) => {
-    console.log(id);
     const newColories = prompt(
       "Измените калории",
       String(data?.products.find((product) => product.id === id)?.weight)
     )!;
-
-    dispath(changeColories({ cardId: card.id, id, newColories }));
+    console.log(card.id, id);
+    dispath(FetchСhangeColories({ cardId: card.id, weight: +newColories, id }));
   };
 
   const deleteProduct = (id: string) => {
     dispath(FetchRemoveProduct(id));
-    dispath(removeProduct({ cardId: card.id, id }));
+    dispath(removeProduct({ cardId: data.id, id }));
   };
 
   return (

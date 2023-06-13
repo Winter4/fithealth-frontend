@@ -17,10 +17,12 @@ export const Input = ({ id, allowedProducts, onChange }: IProps) => {
         list={id}
         placeholder="Продукт"
         defaultValue={allowedProducts[0]?.name || ""}
+        id={id}
         onChange={(selected: ChangeEvent<HTMLInputElement>) =>
           onChange(selected.target.value)
         }
       />
+      <label className={styles.label} htmlFor={id}></label>
       <datalist id={id}>
         {allowedProducts.map((product) => (
           <SelectItem key={String(product.id)} product={product} />

@@ -2,19 +2,19 @@
 
 .wrapper {
   position: relative;
-  &::before {
-    content: "";
-    background: $gray url("@/assets/images/arrowDown.png") no-repeat;
-    background-position: calc(100% - 0.75rem) center !important;
-    position: absolute;
-    left: 100%;
-    transform: translateX(-100%);
-    display: inline-block;
-    width: 39px;
-    height: 38px;
-    border-radius: 0 100px 100px 0;
-    cursor: pointer;
-  }
+}
+
+.label {
+  background: $gray url("@/assets/images/arrowDown.png") no-repeat;
+  background-position: calc(100% - 0.75rem) center !important;
+  position: absolute;
+  left: 100%;
+  transform: translateX(-100%);
+  display: inline-block;
+  width: 39px;
+  height: 38px;
+  border-radius: 0 100px 100px 0;
+  cursor: pointer;
 }
 
 .selectProduct {

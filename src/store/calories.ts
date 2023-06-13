@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   PayloadAction,
   createSlice,
@@ -97,14 +98,12 @@ export const FetchAddProduct = createAsyncThunk(
       weight,
       foodId,
       cardId,
-      id,
       name,
     }: {
       tab: number;
       weight: number;
       foodId: number;
       cardId: string;
-      id: string;
       name: string;
     },
     { rejectWithValue, dispatch }
@@ -124,7 +123,13 @@ export const FetchAddProduct = createAsyncThunk(
         .then((res) => res.json())
         .then((data: IProductItem) => {
           dispatch(
-            addProduct({ cardId, name, id, calories: data.calories, weight })
+            addProduct({
+              cardId,
+              name,
+              id: data.id,
+              calories: data.calories,
+              weight,
+            })
           );
           return data;
         });
@@ -134,30 +139,30 @@ export const FetchAddProduct = createAsyncThunk(
   }
 );
 
-// export const FetchСhangeColories = createAsyncThunk(
-//   "calories/FetchСhangeColories",
-//   async function (
-//     { id, weight }: { id: string; weight: number },
-//     { rejectWithValue }
-//   ) {
-//     try {
-//       return fetch(`${import.meta.env.VITE_APP_API_URL}/meal/${id}`, {
-//         method: "PATCH",
-//         headers: {
-//           "Content-type": "application/json",
-//         },
-//         body: JSON.stringify({ id, weight }),
-//         credentials: "include",
-//       })
-//         .then((res) => res.json())
-//         .then((data) => {
-//           return data;
-//         });
-//     } catch (error: any) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const FetchСhangeColories = createAsyncThunk(
+  "calories/FetchСhangeColories",
+  async function (
+    { id, weight, cardId }: { cardId: string; id: string; weight: number },
+    { rejectWithValue }
+  ) {
+    try {
+      return fetch(`${import.meta.env.VITE_APP_API_URL}/meal/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ id, weight }),
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((data: IProductItem) => {
+          return { cardId, data };
+        });
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 interface IState {
   ateCalories: number;
@@ -322,20 +327,26 @@ export const Calories = createSlice({
       state.error = action.error;
     });
 
-    // builder.addCase(FetchСhangeColories.pending, (state, action) => {
-    //   state.status = "pending";
-    //   state.error = null;
-    // });
+    builder.addCase(FetchСhangeColories.pending, (state, action) => {
+      state.status = "pending";
+      state.error = null;
+    });
 
-    // builder.addCase(FetchСhangeColories.fulfilled, (state, action) => {
-    //   state.status = "fulfilled";
-    //   state.error = null;
-    //   state.products[0].products[0].calories -= action.payload;
-    // });
-    // builder.addCase(FetchСhangeColories.rejected, (state, action) => {
-    //   state.status = "rejected";
-    //   state.error = action.error;
-    // });
+    builder.addCase(FetchСhangeColories.fulfilled, (state, action) => {
+      state.status = "fulfilled";
+      state.error = null;
+      state.products[+action.payload.cardId].products.find(
+        (e) => e.id == action.payload.data.id
+      )!.weight = action.payload.data.weight;
+
+      state.products[+action.payload.cardId].products.find(
+        (e) => e.id == action.payload.data.id
+      )!.calories = action.payload.data.calories;
+    });
+    builder.addCase(FetchСhangeColories.rejected, (state, action) => {
+      state.status = "rejected";
+      state.error = action.error;
+    });
   },
 });
 
