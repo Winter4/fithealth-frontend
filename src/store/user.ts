@@ -1,4 +1,3 @@
-// import axios from "axios";
 import {
   PayloadAction,
   createSlice,
@@ -59,7 +58,5 @@ export const User = createSlice({
     });
   },
 });
-
-// export const {} = User.actions;
 
 export default User.reducer;

@@ -17,7 +17,7 @@ export const AteProduct = ({
   deleteProduct,
 }: IProps) => {
   return (
-    <tr className={styles.product} key={product.id}>
+    <tr className={styles.product}>
       <td className={clsx(styles.td, "medium")}>{product.name}</td>
       <td
         className={clsx(styles.td, "medium")}

@@ -1,0 +1,84 @@
+@import "@/assets/scss/styles.scss";
+
+.td:not(:last-child) {
+  line-height: 17.07px;
+  padding: 5px 0;
+  word-break: break-all;
+  @media (min-width: 600px) {
+    border-right: 1px solid $lineGrey;
+  }
+}
+
+.button {
+  background: none;
+  cursor: pointer;
+  padding: 0 5px;
+  border: 0;
+  outline: 0;
+}
+
+.checkbox__wrapper {
+  position: relative;
+  $inactive-bg-color: #f65d5d;
+  $bigFontSize: #202136;
+  $active-bg-color: #76ee59;
+  $white-color: #ffffff;
+  $border-color: #ffffff;
+  $orange-color: #fe5e00;
+  $red-color: #ffffff;
+  $green-color: #ffffff;
+  $gradient: linear-gradient(
+    125deg,
+    rgba(254, 94, 0, 1) 0%,
+    rgba(246, 69, 98, 1) 100%
+  );
+  $checkbox-width: 48px;
+  $checkbox-height: 21px;
+  $dot-x-end-pos: calc($checkbox-width - calc($checkbox-height) + 2px);
+  $animation-speed: 0.25s;
+  width: $checkbox-width;
+  height: $checkbox-height;
+
+  .custom-checkbox {
+    visibility: hidden;
+  }
+
+  .custom-checkbox-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: $inactive-bg-color;
+    border-radius: calc(calc($checkbox-height / 2) + 2px);
+    transition: background-color $animation-speed linear;
+    box-shadow: inset 0px 6px 8px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      width: 16.8px;
+      height: 16.33px;
+      border-radius: 50%;
+      background-color: $red-color;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 2.4px;
+      transition: all $animation-speed linear;
+    }
+    @media (min-width: 600px) {
+      height: 80%;
+    }
+  }
+
+  .custom-checkbox:checked + .custom-checkbox-label {
+    background-color: $active-bg-color;
+  }
+
+  .custom-checkbox:checked + .custom-checkbox-label:after {
+    left: $dot-x-end-pos;
+    background-color: $green-color;
+  }
+}

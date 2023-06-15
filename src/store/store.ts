@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import Products from "./products";
 import Calories from "./calories";
 import User from "./user";
 
@@ -22,6 +23,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: User,
   calories: Calories,
+  products: Products,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

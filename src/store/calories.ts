@@ -60,11 +60,7 @@ export const FetchFoodData = createAsyncThunk(
             withCredentials: true,
           }
         ),
-      ]).then((data) => {
-        console.log(data, activeTab);
-
-        return [data[0].data, data[1].data];
-      });
+      ]).then((data) => [data[0].data, data[1].data]);
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -111,7 +107,7 @@ export const FetchAddProduct = createAsyncThunk(
     try {
       return fetch(
         `${import.meta.env.VITE_APP_API_URL}/meal/${
-          cardId ? "unhealthy" : "healthy"
+          Number(cardId) ? "unhealthy" : "healthy"
         }?tab=${tab}`,
         {
           method: "POST",

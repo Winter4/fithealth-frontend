@@ -1,0 +1,202 @@
+@import "@/assets/scss/varibles.scss";
+
+.admin {
+  margin-top: 80px;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.logoBlock {
+  display: flex;
+  align-items: center;
+  gap: 25.03px;
+  &__logo {
+    width: 87px;
+    height: 76px;
+  }
+
+  &__h1 {
+    color: $grey;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+  }
+
+  &__span {
+    color: $green;
+  }
+
+  &__p {
+    font-weight: 500;
+    line-height: 17px;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  margin: 32px 0 16px 0;
+  &__img-bg {
+    background: $ligthwhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 8px rgba(138, 138, 138, 0.25);
+  }
+
+  &__img {
+    width: 15.75px;
+    height: 18.28px;
+  }
+
+  &__info {
+    text-align: center;
+  }
+
+  &__h1 {
+    line-height: 20px;
+    font-weight: 600;
+  }
+
+  &__p {
+    color: $grey;
+    line-height: 17px;
+    font-weight: 600;
+  }
+
+  &__span {
+    color: $green;
+  }
+}
+
+.line {
+  background: $border;
+  max-width: 628px;
+  width: 100%;
+  height: 1px;
+}
+
+.addProductForm {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  max-width: 334px;
+  width: 100%;
+  &__p {
+    text-align: center;
+    margin: 31px 0 25px 0;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 155.47px));
+    gap: 22.53px;
+  }
+
+  &__field {
+    background: $darkWhite;
+    border: 0;
+    outline: 0;
+    padding: 11px 50px;
+    border-radius: 100px;
+  }
+
+  &__field_name {
+    width: 100%;
+  }
+
+  &__recommend {
+    background: $darkWhite;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px 27px;
+    border-radius: 100px;
+  }
+
+  &__button {
+    background: $orange;
+    cursor: pointer;
+    color: $white;
+    padding: 7px;
+    width: 100%;
+    outline: 0;
+    border: 0;
+    border-radius: 100px;
+    margin-bottom: 42px;
+  }
+}
+.checkbox__wrapper {
+  position: relative;
+  $inactive-bg-color: #f65d5d;
+  $bigFontSize: #202136;
+  $active-bg-color: #76ee59;
+  $white-color: #ffffff;
+  $border-color: #ffffff;
+  $orange-color: #fe5e00;
+  $red-color: #ffffff;
+  $green-color: #ffffff;
+  $gradient: linear-gradient(
+    125deg,
+    rgba(254, 94, 0, 1) 0%,
+    rgba(246, 69, 98, 1) 100%
+  );
+  $checkbox-width: 48px;
+  $checkbox-height: 21px;
+  $dot-x-end-pos: calc($checkbox-width - calc($checkbox-height) + 2px);
+  $animation-speed: 0.25s;
+  width: $checkbox-width;
+  height: $checkbox-height;
+
+  .custom-checkbox {
+    visibility: hidden;
+  }
+
+  .custom-checkbox-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: $inactive-bg-color;
+    border-radius: calc(calc($checkbox-height / 2) + 2px);
+    transition: background-color $animation-speed linear;
+    box-shadow: inset 0px 6px 8px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      width: 16.8px;
+      height: 16.33px;
+      border-radius: 50%;
+      background-color: $red-color;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 2.4px;
+      transition: all $animation-speed linear;
+    }
+  }
+
+  .custom-checkbox:checked + #custom-checkbox-label {
+    background-color: $active-bg-color;
+  }
+
+  .custom-checkbox:checked + #custom-checkbox-label:after {
+    left: $dot-x-end-pos;
+    background-color: $green-color;
+  }
+}

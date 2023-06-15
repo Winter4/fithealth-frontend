@@ -1,0 +1,45 @@
+@import "@/assets/scss/styles.scss";
+
+.product {
+  background: $greenLight;
+  margin-top: 22px;
+  border-radius: 10px;
+  width: 100%;
+  padding: 9px 30px;
+  text-align: center;
+  max-width: 628px;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    thead {
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    tr {
+      display: block;
+    }
+    td {
+      display: block;
+      font-size: 0.8em;
+      text-align: right;
+    }
+
+    td::before {
+      content: attr(data-label);
+      float: left;
+    }
+  }
+}
+
+.th {
+  color: $grey;
+  line-height: 14.63px;
+  font-weight: 400;
+  line-height: 15px;
+}
